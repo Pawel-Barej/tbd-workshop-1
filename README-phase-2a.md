@@ -89,19 +89,32 @@ the running instance of your Vertex AI Workbench
 
 7. Explore files created by generator and describe them, including format, content, total size.
 
-   ***Files desccription***
+       Generator wrzucił dane do ścieżki /tmp/tpc-di. Dane były przechowywane na następujących formatach:
+       .txt, .xml, .csv.
+        Różne rodzaje danych w różny sposób wpływały na obciążenie.
+        Struktóra danych to
+         Batch1, Batch_audit.csv, Batch2, Batch2_audit.csv,  Batch3, Batch3_audit.csv, Generator_audit.csv, digen_report.txt
+         Batch1 zużywa prawie 1GB danych i składa się z plików csv wykorzystywanych w bazach danych, składa sie z prawie 16mln rkordów
+         Batch2 oraz Batch3 wykorzystuje tylko lekko ponad 12MB danych wykorzystywanych w póxniejszych etapach, tutaj jest tylko niecałe 70000 rekordów.
 
-8. Analyze tpcdi.py. What happened in the loading stage?
+9. Analyze tpcdi.py. What happened in the loading stage?
 
-   ***Your answer***
+       Jest to skrypt, który spowodował że dane przechowywane lokalnie zostały wysłane do chmurowego storage.
+       Możemy wyróżnić takie fazy jak:
+       1. Przetwarzanie danych w tcp-di
+       2. Utworzenie storage dla danych
+       3. Przesłanie danych do storage
+       4. Przeslanie danych do spark dataFrames
 
-9. Using SparkSQL answer: how many table were created in each layer?
+11. Using SparkSQL answer: how many table were created in each layer?
 
-   ***SparkSQL command and output***
+          demo_bronze ma 17 tabel
+          demo_silver ma14 tabel
+          demo_gold ma 12 tabel
+          digen ma 17 tabel
 
-10. Add some 3 more [dbt tests](https://docs.getdbt.com/docs/build/tests) and explain what you are testing. ***Add new tests to your repository.***
+11. Add some 3 more [dbt tests](https://docs.getdbt.com/docs/build/tests) and explain what you are testing.
 
-   ***Code and description of your tests***
 
 11. In main.tf update
    ```
@@ -112,4 +125,5 @@ the running instance of your Vertex AI Workbench
 
 12. Redeploy infrastructure and check if the DAG finished with no errors:
 
-***The screenshot of Apache Aiflow UI***
+![image](https://github.com/Pawel-Barej/tbd-workshop-1/assets/89931555/f3f05564-f6a1-472e-bb02-ff3033cf4335)
+
