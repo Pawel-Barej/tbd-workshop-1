@@ -25,9 +25,18 @@ https://console.cloud.google.com/apis/api/compute.googleapis.com/quotas?project=
 
 in profiles.yml.
 
-4. In the notebook, collect console output from dbt run, then parse it and retrieve total execution time and execution times of processing each model. Save the results from each number of executors. 
+4. In the notebook, collect console output from dbt run, then parse it and retrieve total execution time and execution times of processing each model. Save the results from each number of executors.
 
-5. Analyze the performance and scalability of execution times of each model. Visualize and discucss the final results.
+         Wykonalismy różną liczbę executor:
+           dla 1 executor około 690s
+          dla 2 executors - 430s
+          dla 5 executors - 400s
 
+6. Analyze the performance and scalability of execution times of each model. Visualize and discucss the final results.
+
+         Odczuwamy znaczne kożyści jeśli weźmiemy dwa executory zamiast jednego. Ciekawe natomiast jest to że je śli postanowimy wziąć 5 zamist 2 to
+         odczujemy niewielką różnicę za to koszta wzroną wielokrotnie. Ciężko zwizualizować te różnice natomiast widać je po samych czasach.
+
+         Skalowalność najlepsza jest dla 5 executorów ale najlpszym wyborem jakości do ceny będzie wybranie 2.
 
    
