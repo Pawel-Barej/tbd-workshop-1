@@ -115,6 +115,33 @@ the running instance of your Vertex AI Workbench
 
 11. Add some 3 more [dbt tests](https://docs.getdbt.com/docs/build/tests) and explain what you are testing.
 
+          Pierwszy test sprawdzający czy Czy każdy sk_trade jest unikatowy w tabeli.
+          Wykonalismy 3 podobne testy dla inny tabl
+    
+          select 
+          sk_trade_id, 
+          count(*) cnt
+          from {{ ref('fact_trade') }} 
+          group by sk_trade_id
+            having cnt > 1
+
+
+          select 
+          sk_broker_id, 
+          count(*) cnt
+          from {{ ref('fact_trade') }} 
+          group by sk_broker_id
+            having cnt > 1
+
+
+
+              select 
+          sk_customer_id, 
+          count(*) cnt
+          from {{ ref('fact_cash_balances') }} 
+          group by sk_customer_id
+            having cnt > 1
+
 
 11. In main.tf update
    ```
